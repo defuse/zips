@@ -5251,10 +5251,10 @@ $\NotePlaintext{}$ is encoded as defined in \crossref{notept}.
 Let $\cvNew{}$ be the \valueCommitment for the new \note, and let $\cmNew{}$ be the \noteCommitment.
 
 \introlist
-Then to encrypt:
+Then to encrypt\footnote{\href{https://github.com/defuse/librustzcash/blob/linkdemo1/zcash_primitives/src/note_encryption.rs\#L302}{DOC:ZP:6rs1uiXvP64s}}:
 
 \begin{algorithm}
-  \item choose a uniformly random ephemeral private key $\EphemeralPrivate \leftarrowR \KASaplingPrivate \setminus \setof{0}$
+\item choose a uniformly random ephemeral private key $\EphemeralPrivate \leftarrowR \KASaplingPrivate \setminus \setof{0}$\footnote{\href{https://github.com/defuse/librustzcash/blob/9d6f63fd9a35564d2964a0fa8d70db646a8aea0a/zcash_primitives/src/note_encryption.rs\#L141}{DOC:ZP:9wbsF-McWWvb}}
   \item let $\EphemeralPublic = \KASaplingDerivePublic(\EphemeralPrivate, \DiversifiedTransmitBaseNew)$
   \item let $\TransmitPlaintext{}$ be the raw encoding of $\NotePlaintext{}$
   \item let $\DHSecret{} = \KASaplingAgree(\EphemeralPrivate, \DiversifiedTransmitPublicNew)$
@@ -5299,7 +5299,8 @@ $u$-coordinate of the \noteCommitment).
 
 \introlist
 The recipient will attempt to decrypt the $\EphemeralPublic$ and $\TransmitCiphertext{}$
-components of the \noteCiphertext as follows:
+components of the \noteCiphertext as
+follows\footnote{\href{https://github.com/defuse/librustzcash/blob/linkdemo1/zcash_primitives/src/note_encryption.rs\#L397}{DOC:ZP:L-9nrnp8oDEE}}:
 
 \begin{algorithm}
   \item let $\DHSecret{} = \KASaplingAgree(\InViewingKey, \EphemeralPublic)$
@@ -6428,7 +6429,7 @@ $\PRFock{}$ is used in \crossref{saplingencrypt} to derive the
 \outgoingCipherKey $\OutCipherKey$ used to encrypt an \outputCiphertext.
 
 It is instantiated using the $\BlakeTwobGeneric$ \hashFunction defined in
-\crossref{concreteblake2}:
+\crossref{concreteblake2} \footnote{\href{https://github.com/defuse/librustzcash/blob/9d6f63fd9a35564d2964a0fa8d70db646a8aea0a/zcash_primitives/src/note_encryption.rs\#L22}{DOC:ZP:OgWNfu810kUH}}:
 
 \begin{formulae}
   \item $\PRFock{\OutViewingKey}(\cvField, \cmuField, \ephemeralKey) := \BlakeTwobOf{256}{\ascii{Zcash\_Derive\_ock}, \ockInput}$
@@ -6445,7 +6446,7 @@ to $\OutViewingKey$, with input in the bits corresponding to $\cvField$, $\cmuFi
 \vspace{2ex}
 \introlist
 $\PRFnfSapling{}$ is used to derive the \nullifier for a \Sapling{} \note.
-It is instantiated using the $\BlakeTwosGeneric$ \hashFunction defined in \crossref{concreteblake2}:
+It is instantiated using the $\BlakeTwosGeneric$ \hashFunction defined in \crossref{concreteblake2}\footnote{DOC:ZP:7Buk5lYNz0Rg: \href{https://github.com/defuse/librustzcash/blob/9d6f63fd9a35564d2964a0fa8d70db646a8aea0a/zcash_primitives/src/note_encryption.rs\#L24}{1}, \href{https://github.com/defuse/librustzcash/blob/linkdemo1/zcash_primitives/src/note_encryption.rs\#L193}{2}}:
 
 \begin{formulae}
   \item $\PRFnfSapling{\AuthProvePublicRepr}(\NoteAddressRandRepr) := \BlakeTwosOf{256}{\ascii{Zcash\_nf}, \Justthebox{\nfsaplingbox}}$.
@@ -6590,7 +6591,8 @@ Define $\KASaplingPrivate := \GF{\ParamJ{r}}$.
 
 Define $\KASaplingDerivePublic(\sk, B) := \scalarmult{\sk}{B}$.
 
-Define $\KASaplingAgree(\sk, P) := \scalarmult{\ParamJ{h} \mult \sk}{P}$.
+Define $\KASaplingAgree(\sk, P) := \scalarmult{\ParamJ{h} \mult
+\sk}{P}$.\footnote{\href{https://github.com/defuse/librustzcash/blob/9d6f63fd9a35564d2964a0fa8d70db646a8aea0a/zcash_primitives/src/note_encryption.rs\#L157}{DOC:ZP:yPWO7VlEy9dN}}
 } %sapling
 
 
